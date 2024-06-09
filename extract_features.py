@@ -72,7 +72,7 @@ def pitch_frequency(x, samplerate=44100):
     freqs = np.linspace(0, samplerate/2, length//2+1)
     return float(freqs[np.argmax(magnitudes)])
 
-def extract_features(y, sr=44100, window_size=4096, stride=2048, max_len=65536):
+def extract_features(y, sr=44100, window_size=8192, stride=4096, max_len=131072):
     if max_len != None: y = y[:max_len]
     windows = [y[i:i+window_size] for i in range(0, y.shape[0]-window_size, stride)]
     zero_crossing_rates = []
