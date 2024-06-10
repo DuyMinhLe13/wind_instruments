@@ -80,11 +80,17 @@ def extract_features(y, sr=44100, window_size=8192, stride=4096, max_len=131072)
     bandwidths = []
     spectral_centroids = []
     pitch_frequencies = []
+    general = dict()
+    general['zero_crossing_rate'] = zero_crossing_rate(y, sr)
+    general['avg_energy'] = avg_energy(y, sr)
+    general['bandwidth'] = bandwidth(y, sr)
+    general['spectral_centroid'] = spectral_centroid(y, sr)
+    general['pitch_frequency'] = pitch_frequency(y, sr)
     for window in windows:
         zero_crossing_rates.append(zero_crossing_rate(window, sr))
         avg_energies.append(avg_energy(window, sr))
         bandwidths.append(bandwidth(window, sr))
         spectral_centroids.append(spectral_centroid(window, sr))
         pitch_frequencies.append(pitch_frequency(window, sr))
-    return zero_crossing_rates, avg_energies, bandwidths, spectral_centroids, pitch_frequencies
+    return zero_crossing_rates, avg_energies, bandwidths, spectral_centroids, pitch_frequencies, general
 
