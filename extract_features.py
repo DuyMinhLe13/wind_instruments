@@ -45,7 +45,7 @@ def bandwidth(x, samplerate=44100, threshold=-41):
     threshold: 3db above silent level
     """
     length = x.shape[0]
-    magnitudes = 10 * np.log10(np.abs(FFT(x))[:length//2+1] / float(N)) # magnitudes of positive frequencies
+    magnitudes = 10 * np.log10(np.abs(FFT(x))[:length//2+1] / float(length)) # magnitudes of positive frequencies
     freqs = np.linspace(0, samplerate/2, length//2+1) # positive frequencies
     positive_mag_index = (magnitudes > threshold).nonzero()[0]
     return float(freqs[positive_mag_index[-1]] - freqs[positive_mag_index[0]])
